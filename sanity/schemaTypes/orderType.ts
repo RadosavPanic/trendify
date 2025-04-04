@@ -128,7 +128,7 @@ export const orderType = defineType({
   ],
   preview: {
     select: {
-      name: "customerPrice",
+      name: "customerName",
       amount: "totalPrice",
       currency: "currency",
       orderId: "orderNumber",
