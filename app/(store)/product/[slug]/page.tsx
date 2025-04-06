@@ -5,6 +5,9 @@ import Image from "next/image";
 import { PortableText } from "next-sanity";
 import AddToCartButton from "@/components/AddToCartButton";
 
+export const dynamic = "force-static";
+export const revalidate = 1800;
+
 const ProductPage = async ({ params }: SearchParamProps) => {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
