@@ -30,14 +30,14 @@ const CartPage = () => {
     return <Loader />;
   }
 
-  if (groupedItems.length === 0) {
-    return (
-      <div className="container mx-auto p-4 flex flex-col items-center justify-center min-h-[50vh]">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">Your Cart</h1>
-        <p className="text-gray-600 text-lg">Your cart is empty.</p>
-      </div>
-    );
-  }
+  // if (groupedItems.length === 0) {
+  //   return (
+  //     <div className="container mx-auto p-4 flex flex-col items-center justify-center min-h-[50vh]">
+  //       <h1 className="text-2xl font-bold mb-6 text-gray-800">Your Cart</h1>
+  //       <p className="text-gray-600 text-lg">Your cart is empty.</p>
+  //     </div>
+  //   );
+  // }
 
   const handleCheckout = async () => {
     if (!isSignedIn) return;
@@ -65,47 +65,55 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-6xl">
-      <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+      <h1 className="text-2xl font-bold mt-6">Your Cart</h1>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-grow">
-          {groupedItems?.map((item) => (
-            <div
-              key={item.product._id}
-              className="mb-4 p-4 border rounded flex items-center justify-between"
-            >
-              <div
-                className="flex items-center cursor-pointer flex-1 min-w-0"
-                onClick={() =>
-                  router.push(`/product/${item.product.slug?.current}`)
-                }
-              >
-                <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 mr-4">
-                  {item.product.image && (
-                    <Image
-                      src={imageUrl(item.product.image).url()}
-                      alt={item.product.name ?? "Product image"}
-                      className="w-full h-full object-cover rounded"
-                      width={96}
-                      height={96}
-                    />
-                  )}
-                </div>
-                <div className="min-w-0">
-                  <h2 className="text-lg sm:text-xl font-semibold truncate">
-                    {item.product.name}
-                  </h2>
-                  <p className="text-sm sm:text-base">
-                    Price: €
-                    {((item.product.price ?? 0) * item.quantity).toFixed(2)}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center ml-4 flex-shrink-0">
-                <AddToCartButton product={item.product} />
-              </div>
+          {groupedItems.length === 0 ? (
+            <div className="mt-2 mb-4 p-4 border rounded flex items-center justify-center">
+              <p className="text-gray-600 text-lg">
+                There are no items in your cart.
+              </p>
             </div>
-          ))}
+          ) : (
+            groupedItems?.map((item) => (
+              <div
+                key={item.product._id}
+                className="mb-4 p-4 border rounded flex items-center justify-between"
+              >
+                <div
+                  className="flex items-center cursor-pointer flex-1 min-w-0"
+                  onClick={() =>
+                    router.push(`/product/${item.product.slug?.current}`)
+                  }
+                >
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 mr-4">
+                    {item.product.image && (
+                      <Image
+                        src={imageUrl(item.product.image).url()}
+                        alt={item.product.name ?? "Product image"}
+                        className="w-full h-full object-cover rounded"
+                        width={96}
+                        height={96}
+                      />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <h2 className="text-lg sm:text-xl font-semibold truncate">
+                      {item.product.name}
+                    </h2>
+                    <p className="text-sm sm:text-base">
+                      Price: €
+                      {((item.product.price ?? 0) * item.quantity).toFixed(2)}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center ml-4 flex-shrink-0">
+                  <AddToCartButton product={item.product} />
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         <div className="w-full lg:w-80 lg:sticky lg:top-4 h-fit bg-white p-6 border rounded order-first lg:order-last fixed bottom-0 left-0 lg:left-auto">
@@ -113,17 +121,26 @@ const CartPage = () => {
           <div className="mt-4 space-y-2">
             <p className="flex justify-between">
               <span>Items:</span>
-              <span>
-                {groupedItems.reduce((total, item) => total + item.quantity, 0)}
+              <span className="font-bold text-2xl -mt-1">
+                {groupedItems.length === 0
+                  ? "-"
+                  : groupedItems.reduce(
+                      (total, item) => total + item.quantity,
+                      0
+                    )}
               </span>
             </p>
             <p className="flex justify-between text-2xl font-bold border-t pt-2">
               <span>Total:</span>
-              <span>€{useCartStore.getState().getTotalPrice().toFixed(2)}</span>
+              <span>
+                {groupedItems.length === 0
+                  ? "-"
+                  : `€${useCartStore.getState().getTotalPrice().toFixed(2)}`}
+              </span>
             </p>
           </div>
 
-          {isSignedIn ? (
+          {groupedItems.length === 0 ? null : isSignedIn ? (
             <button
               className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:bg-gray-400"
               disabled={isLoading}
