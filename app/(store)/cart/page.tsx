@@ -30,15 +30,6 @@ const CartPage = () => {
     return <Loader />;
   }
 
-  // if (groupedItems.length === 0) {
-  //   return (
-  //     <div className="container mx-auto p-4 flex flex-col items-center justify-center min-h-[50vh]">
-  //       <h1 className="text-2xl font-bold mb-6 text-gray-800">Your Cart</h1>
-  //       <p className="text-gray-600 text-lg">Your cart is empty.</p>
-  //     </div>
-  //   );
-  // }
-
   const handleCheckout = async () => {
     if (!isSignedIn) return;
     setIsLoading(true);
@@ -65,7 +56,7 @@ const CartPage = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-6xl">
-      <h1 className="text-2xl font-bold mt-6">Your Cart</h1>
+      <h1 className="text-2xl font-bold mt-6 mb-2">Your Cart</h1>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-grow">
           {groupedItems.length === 0 ? (
@@ -121,7 +112,9 @@ const CartPage = () => {
           <div className="mt-4 space-y-2">
             <p className="flex justify-between">
               <span>Items:</span>
-              <span className="font-bold text-2xl -mt-1">
+              <span
+                className={`${groupedItems.length === 0 ? "font-bold text-2xl -mt-1" : ""}`}
+              >
                 {groupedItems.length === 0
                   ? "-"
                   : groupedItems.reduce(

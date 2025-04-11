@@ -8,7 +8,7 @@ import { draftMode } from "next/headers";
 import DisableDraftMode from "@/components/DisableDraftMode";
 
 export const metadata: Metadata = {
-  title: "Trendify",
+  title: "Trendify - Shop Smart, Dress Sharp - Fashion You Love at Fair Prices",
   description: "E-Commerce store with dozens of products made for your choice",
 };
 
