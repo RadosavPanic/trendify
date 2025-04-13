@@ -30,8 +30,12 @@ const ProductThumb = ({ product }: { product: Product }) => {
       </div>
 
       <div className="p-4">
-        <h2 className="text-lg font-semibold text-gray-800 truncate">
+        <h2 className="text-lg font-bold text-gray-800 truncate">
           {product.name}
+        </h2>
+
+        <h2 className="text-[16px] font-medium text-gray-500 truncate">
+          {product.subtitle}
         </h2>
 
         <p className="mt-2 text-sm text-gray-600 line-clamp-2">

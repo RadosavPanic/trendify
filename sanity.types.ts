@@ -121,6 +121,7 @@ export type Product = {
   _rev: string;
   name?: string;
   slug?: Slug;
+  subtitle?: string;
   image?: {
     asset?: {
       _ref: string;
@@ -305,6 +306,7 @@ export type MY_ORDERS_QUERYResult = Array<{
       _rev: string;
       name?: string;
       slug?: Slug;
+      subtitle?: string;
       image?: {
         asset?: {
           _ref: string;
@@ -391,6 +393,7 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
   _rev: string;
   name?: string;
   slug?: Slug;
+  subtitle?: string;
   image?: {
     asset?: {
       _ref: string;
@@ -454,6 +457,7 @@ export type PRODUCT_BY_ID_QUERYResult = {
   _rev: string;
   name?: string;
   slug?: Slug;
+  subtitle?: string;
   image?: {
     asset?: {
       _ref: string;
@@ -517,6 +521,7 @@ export type PRODUCTS_BY_CATEGORY_QUERYResult = Array<{
   _rev: string;
   name?: string;
   slug?: Slug;
+  subtitle?: string;
   image?: {
     asset?: {
       _ref: string;
@@ -580,6 +585,7 @@ export type PRODUCT_SEARCH_QUERYResult = Array<{
   _rev: string;
   name?: string;
   slug?: Slug;
+  subtitle?: string;
   image?: {
     asset?: {
       _ref: string;

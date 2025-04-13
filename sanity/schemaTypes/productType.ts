@@ -24,6 +24,11 @@ export const productType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "string",
+    }),
+    defineField({
       name: "image",
       title: "Product Image",
       type: "image",
@@ -60,11 +65,12 @@ export const productType = defineType({
       title: "name",
       media: "image",
       price: "price",
+      subtitle: "subtitle",
     },
     prepare(select) {
       return {
         title: select.title,
-        subtitle: `$${select.price}`,
+        subtitle: `€${select.price} - ${select.subtitle}`,
         media: select.media,
       };
     },
