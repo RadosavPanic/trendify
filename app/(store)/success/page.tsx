@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import useCartStore from "@/store/store";
+import useCartStore from "@/store/cartStore";
 
 const SuccessPage = () => {
   const searchParams = useSearchParams();

@@ -6,7 +6,7 @@ const EasterBanner = async () => {
   if (!sale?.isActive) return null;
 
   return (
-    <div className="bg-gradient-to-r from-blue-600 to-green-300 text-white px-6 py-10 mx-4 mt-2 rounded-lg shadow-lg">
+    <div className="bg-gradient-to-r from-blue-600 to-green-300 text-white px-6 py-10 mx-4 mt-3 rounded-lg shadow-lg">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex-1">
           <h2 className="text-3xl sm:text-5xl font-extrabold text-left mb-4">

@@ -10,56 +10,55 @@ import Image from "next/image";
 import Form from "next/form";
 
 import { ClerkLoaded, SignInButton, UserButton, useUser } from "@clerk/nextjs";
-import useCartStore from "@/store/store";
+import useCartStore from "@/store/cartStore";
 import { useState } from "react";
+import MenuContainer from "./MenuContainer";
+import MenuView from "./MenuView";
 
 const Header = () => {
   const { user } = useUser();
+
   const itemCount = useCartStore((state) =>
     state.items.reduce((total, item) => total + item.quantity, 0)
   );
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleToggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
+  const handleToggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
   };
 
   return (
-    <header className="flex w-full flex-wrap justify-between items-center px-4 py-2">
-      <Link href="/" className="flex items-center space-x-2 text-blue-500">
+    <header className="relative flex w-full flex-wrap justify-between items-center h-16 px-4">
+      <Link href="/" className="flex items-center space-x-2 h-16 text-blue-500">
         <Image src="/trendify.png" alt="trendify-logo" width={50} height={50} />
         <span className="family-lobster text-3xl hidden md:inline">
           Trendify
         </span>
       </Link>
 
-      <div className="flex items-center space-x-3 mt-4 sm:mt-2 flex-1 justify-end">
+      <MenuContainer />
+
+      <MenuView />
+
+      <div className="flex items-center space-x-3 h-16 flex-1 justify-end">
         <Form
           action="/search"
-          className="hidden lg:flex bg-gray-100 text-gray-800 rounded-full border mr-7"
+          className="flex bg-gray-100 text-gray-800 rounded-full border mr-4"
         >
-          <div className="relative group">
-            <button
-              type="submit"
-              className="absolute rounded-full border-r-2 border-r-gray-300 group-hover:bg-gray-100 hover:bg-gray-200 hover:text-blue-500 cursor-pointer"
-            >
-              <SearchIcon className="w-9 h-9" />
-            </button>
-            <input
-              type="text"
-              name="query"
-              className="peer font-light group-hover:bg-gray-200 hover:bg-gray-200 px-10 py-1 rounded-full border w-full max-w-4xl"
-              placeholder="Search for products"
-            />
-          </div>
+          <button
+            type="submit"
+            className="rounded-full border-r-2 font-bold cursor-pointer"
+          >
+            <SearchIcon className="w-9 h-9" />
+          </button>
         </Form>
 
         <ClerkLoaded>
           {user ? (
-            <div className="flex items-center space-x-2 -mr-2 md:mr-1 lg:mr-3">
+            <div className="flex items-center space-x-2 -mr-2 lg:mr-3">
               <UserButton />
-              <div className="hidden md:block text-xs">
+              <div className="hidden lg:block text-xs">
                 <p className="text-gray-700">Welcome back</p>
                 <p className="font-bold">{user?.fullName}</p>
               </div>
@@ -89,36 +88,19 @@ const Header = () => {
         </Link>
 
         <div className="lg:hidden ml-3">
-          {isMenuOpen ? (
-            <IoClose className="w-[25px] h-[25px]" onClick={handleToggleMenu} />
+          {isMobileMenuOpen ? (
+            <IoClose
+              className="w-[25px] h-[25px]"
+              onClick={handleToggleMobileMenu}
+            />
           ) : (
             <GiHamburgerMenu
               className="w-[25px] h-[25px]"
-              onClick={handleToggleMenu}
+              onClick={handleToggleMobileMenu}
             />
           )}
         </div>
       </div>
-
-      <Form
-        action="/search"
-        className="block w-full lg:hidden mt-4 bg-gray-100 text-gray-800 rounded-full"
-      >
-        <div className="relative group">
-          <button
-            type="submit"
-            className="absolute top-1/2 transform -translate-y-1/2 rounded-full border-r-2 border-r-gray-300 group-hover:bg-gray-100 hover:bg-gray-200 hover:text-blue-500 cursor-pointer"
-          >
-            <SearchIcon className="w-11 h-11" />
-          </button>
-          <input
-            type="text"
-            name="query"
-            className="peer font-semibold group-hover:bg-gray-200 hover:bg-gray-200 rounded-full border w-full pl-15 py-2"
-            placeholder="Search for products"
-          />
-        </div>
-      </Form>
     </header>
   );
 };

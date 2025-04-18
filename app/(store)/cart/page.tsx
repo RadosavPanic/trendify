@@ -7,7 +7,7 @@ import {
 import AddToCartButton from "@/components/AddToCartButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
-import useCartStore from "@/store/store";
+import useCartStore from "@/store/cartStore";
 import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

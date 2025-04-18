@@ -39,7 +39,10 @@ const ProductPage = async ({ params }: SearchParamProps) => {
 
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
+            <h1 className="text-3xl font-bold mb-0">{product.name}</h1>
+            <h2 className="text-xl font-medium text-gray-500 mb-2">
+              {product.subtitle}
+            </h2>
             <div className="text-xl font-semibold mb-4">
               €{product.price?.toFixed(2)}
             </div>

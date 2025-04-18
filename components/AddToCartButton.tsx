@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/sanity.types";
-import useCartStore from "@/store/store";
+import useCartStore from "@/store/cartStore";
 import { Trash2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 
