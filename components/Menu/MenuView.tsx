@@ -1,27 +1,17 @@
-import Link from "next/link";
 import useMenuStore, { MenuOptions } from "@/store/menuStore";
+import MenuItem from "./MenuItem";
 
 const MenuView = () => {
   const { isMenuOpen, menuOption, closeMenu } = useMenuStore();
 
   const menuItems = {
     newFeatured: {
-      Shoes: [
-        "Nike",
-        "Adidas",
-        "Reebok",
-        "Asics",
-        "New Balance",
-        "Puma",
-        "Training and Gym",
-        "Slippers",
-      ],
+      Featured: ["Shop All New Arrivals", "Best Sellers", "Last in Stock"],
       "Shop Icons": [
         "Nike Sportswear",
         "Adidas RunFalcon",
+        "Nike Air Max",
         "Under Armour",
-        "Headwear",
-        "Socks",
       ],
       Jordan: [
         "Shop All Jordan",
@@ -38,6 +28,7 @@ const MenuView = () => {
       ],
     },
     men: {
+      Featured: ["New Arrivals", "Best Sellers", "Last in Stock"],
       Shoes: [
         "All Shoes",
         "Running",
@@ -56,20 +47,20 @@ const MenuView = () => {
         "Shorts",
       ],
       "Accessories and Equipment": [
+        "All Accessories and Equipment",
+        "Bags and Backpacks",
         "Hats",
-        "Backpacks",
-        "Bags",
         "Headwear",
         "Socks",
       ],
     },
     women: {
+      Featured: ["New Arrivals", "Best Sellers", "Last in Stock"],
       Shoes: [
         "All Shoes",
-        "Running",
+        "Lifestyle",
         "Jordan",
-        "Nike Air",
-        "Football",
+        "Running",
         "Training and Gym",
         "Slippers",
       ],
@@ -78,26 +69,28 @@ const MenuView = () => {
         "Hoodies and Sweatshirts",
         "Jackets",
         "Trousers",
+        "Leggings",
         "Tops and T-Shirts",
         "Shorts",
+        "Sports Bras",
       ],
       "Accessories and Equipment": [
+        "All Accessories and Equipment",
+        "Bags and Backpacks",
         "Hats",
-        "Backpacks",
-        "Bags",
         "Headwear",
         "Socks",
       ],
     },
     kids: {
+      Featured: ["New Arrivals", "Best Sellers", "Last in Stock"],
       Shoes: [
         "All Shoes",
-        "Running",
+        "Lifestyle",
         "Jordan",
-        "Nike Air",
         "Football",
-        "Training and Gym",
-        "Slippers",
+        "Running",
+        "Basketball",
       ],
       Clothing: [
         "All Clothing",
@@ -108,18 +101,12 @@ const MenuView = () => {
         "Shorts",
       ],
       "Accessories and Equipment": [
-        "Hats",
-        "Backpacks",
-        "Bags",
-        "Headwear",
+        "All Accessories and Equipment",
+        "Bags and Backpacks",
         "Socks",
       ],
     },
   };
-
-  const getItemKeys = <T extends Record<string, unknown>>(
-    category: T
-  ): Array<keyof T> => Object.keys(category) as Array<keyof T>;
 
   return (
     <div
@@ -128,65 +115,21 @@ const MenuView = () => {
     >
       <div className="absolute -top-6 left-0 right-0 h-6 bg-transparent" />
 
-      <div className="flex flex-col items-center justify-evenly gap-3 w-full h-[33vh] py-4 text-gray-800">
+      <div className="flex flex-col items-center justify-start w-full h-[33vh] py-8">
         {menuOption === MenuOptions.newFeatured && (
-          <div className="flex flex-row items-center justify-between">
-            {getItemKeys(menuItems.newFeatured).map((itemKey) => (
-              <div className="flex flex-col items-start px-4" key={itemKey}>
-                <h1 className="font-bold mb-2">{itemKey}</h1>
-                {menuItems.newFeatured[itemKey].map((name, index) => (
-                  <Link href="#" className="cursor-pointer" key={index}>
-                    {name}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </div>
+          <MenuItem menuCategory={menuItems.newFeatured} />
         )}
 
         {menuOption === MenuOptions.men && (
-          <div className="flex flex-row items-center justify-between">
-            {getItemKeys(menuItems.men).map((itemKey) => (
-              <div className="flex flex-col items-start px-4" key={itemKey}>
-                <h1 className="font-bold mb-2">{itemKey}</h1>
-                {menuItems.men[itemKey].map((name, index) => (
-                  <Link href="#" className="cursor-pointer" key={index}>
-                    {name}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </div>
+          <MenuItem menuCategory={menuItems.men} />
         )}
 
         {menuOption === MenuOptions.women && (
-          <div className="flex flex-row items-center justify-between">
-            {getItemKeys(menuItems.women).map((itemKey) => (
-              <div className="flex flex-col items-start px-4" key={itemKey}>
-                <h1 className="font-bold mb-2">{itemKey}</h1>
-                {menuItems.women[itemKey].map((name, index) => (
-                  <Link href="#" className="cursor-pointer" key={index}>
-                    {name}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </div>
+          <MenuItem menuCategory={menuItems.women} />
         )}
 
         {menuOption === MenuOptions.kids && (
-          <div className="flex flex-row items-center justify-between">
-            {getItemKeys(menuItems.kids).map((itemKey) => (
-              <div className="flex flex-col items-start px-4" key={itemKey}>
-                <h1 className="font-bold mb-2">{itemKey}</h1>
-                {menuItems.kids[itemKey].map((name, index) => (
-                  <Link href="#" className="cursor-pointer" key={index}>
-                    {name}
-                  </Link>
-                ))}
-              </div>
-            ))}
-          </div>
+          <MenuItem menuCategory={menuItems.kids} />
         )}
       </div>
     </div>
