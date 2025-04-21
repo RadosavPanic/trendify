@@ -3,10 +3,10 @@ import { persist } from "zustand/middleware";
 
 export enum MenuOptions {
   default = "",
-  newFeatured = "newFeatured",
-  men = "men",
-  women = "women",
-  kids = "kids",
+  "New And Featured" = "New And Featured",
+  Men = "Men",
+  Women = "Women",
+  Kids = "Kids",
 }
 
 type MenuState = {

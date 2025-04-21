@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -38,12 +38,16 @@ const CategoriesSelectorComponent = ({ categories }: CategorySelectorProps) => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full max-w-full relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 hover:text-white text-white font-bold py-2 px-4 rounded"
+          className="w-full max-w-full relative flex justify-between sm:flex-none items-center bg-gray-100 text-black font-bold py-2 px-4 border-none shadow-none cursor-pointer"
         >
           {value
             ? categories.find((category) => category._id === value)?.title
             : "Filter by Category"}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0" />
+          {open ? (
+            <ChevronUp className="ml-2 h-4 w-4 shrink-0" />
+          ) : (
+            <ChevronDown className="ml-2 h-4 w-4 shrink-0" />
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">

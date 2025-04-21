@@ -1,14 +1,14 @@
-import Link from "next/link";
 import { MenuOptions } from "@/store/menuStore";
 import useMenuStore from "@/store/menuStore";
+import { useRouter } from "next/navigation";
 
 type MenuLinkProps = {
-  linkHref: string;
-  linkText: string;
+  path: string;
+  text: string;
   option: MenuOptions;
 };
 
-const MenuLink = ({ linkHref, linkText, option }: MenuLinkProps) => {
+const MenuLink = ({ path, text, option }: MenuLinkProps) => {
   const {
     menuOption,
     openMenu,
@@ -17,14 +17,16 @@ const MenuLink = ({ linkHref, linkText, option }: MenuLinkProps) => {
     deactivateUnderline,
   } = useMenuStore();
 
+  const router = useRouter();
+
   return (
     <div
       className="relative flex items-center justify-center h-16 px-4 cursor-pointer"
       data-option={option}
       onMouseEnter={openMenu}
     >
-      <Link
-        href={linkHref}
+      <div
+        onClick={() => router.push(`/categories/${path}`)}
         className="flex items-center justify-center w-full h-full z-10"
       >
         <span
@@ -32,9 +34,9 @@ const MenuLink = ({ linkHref, linkText, option }: MenuLinkProps) => {
           onMouseEnter={activateUnderline}
           onMouseLeave={deactivateUnderline}
         >
-          {linkText}
+          {text}
         </span>
-      </Link>
+      </div>
 
       <span
         className={`absolute bottom-3 left-3 right-3 h-0.5 origin-center rounded-full bg-black transition-transform ${isLinkActive && menuOption === option ? "scale-x-100" : "scale-x-0"} duration-300 ease-out`}
