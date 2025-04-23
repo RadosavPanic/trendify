@@ -4,31 +4,132 @@ import { persist } from "zustand/middleware";
 
 export type ProductState = {
   products: Product[];
+  originalProducts: Product[];
+  priceSelectorOpen: boolean;
+  priceFilterState: {
+    priceUnder100: boolean;
+    price100to150: boolean;
+    price150to200: boolean;
+    priceOver200: boolean;
+  };
   setProducts: (products: Product[]) => void;
-  filterPriceUnder100: () => Product[];
-  filterPrice100to150: () => Product[];
-  filterPrice150to200: () => Product[];
-  filterPriceOver200: () => Product[];
+  togglePriceSelectorOpen: () => void;
+  setPriceFilterState: (
+    key: keyof ProductState["priceFilterState"],
+    value: boolean
+  ) => void;
+  filterPriceUnder100: () => void;
+  filterPrice100to150: () => void;
+  filterPrice150to200: () => void;
+  filterPriceOver200: () => void;
+  applyFilters: () => void;
 };
 
 const useProductsStore = create<ProductState>()(
   persist(
     (set, get) => ({
       products: [],
-      setProducts: (products: Product[]) => set({ products }),
-      filterPriceUnder100: () =>
-        get().products.filter((product) => product.price! < 100),
-      filterPrice100to150: () =>
-        get().products.filter(
-          (product) => product.price! >= 100 && product.price! < 150
-        ),
-      filterPrice150to200: () =>
-        get().products.filter(
-          (product) => product.price! >= 150 && product.price! < 200
-        ),
-      filterPriceOver200: () =>
-        get().products.filter((product) => product.price! >= 200),
+      originalProducts: [],
+      priceSelectorOpen: false,
+      priceFilterState: {
+        priceUnder100: false,
+        price100to150: false,
+        price150to200: false,
+        priceOver200: false,
+      },
+      setProducts: (products: Product[]) =>
+        set({ originalProducts: products, products: products }),
+      togglePriceSelectorOpen: () =>
+        set((state) => ({ priceSelectorOpen: !state.priceSelectorOpen })),
+      setPriceFilterState: (key, value) =>
+        set((state) => ({
+          priceFilterState: { ...state.priceFilterState, [key]: value },
+        })),
+
+      filterPriceUnder100: () => {
+        const {
+          priceFilterState: { priceUnder100 },
+          setPriceFilterState,
+          applyFilters,
+        } = get();
+        setPriceFilterState("priceUnder100", !priceUnder100);
+        applyFilters();
+      },
+      filterPrice100to150: () => {
+        const {
+          priceFilterState: { price100to150 },
+          setPriceFilterState,
+          applyFilters,
+        } = get();
+        setPriceFilterState("price100to150", !price100to150);
+        applyFilters();
+      },
+      filterPrice150to200: () => {
+        const {
+          priceFilterState: { price150to200 },
+          setPriceFilterState,
+          applyFilters,
+        } = get();
+        setPriceFilterState("price150to200", !price150to200);
+        applyFilters();
+      },
+      filterPriceOver200: () => {
+        const {
+          priceFilterState: { priceOver200 },
+          setPriceFilterState,
+          applyFilters,
+        } = get();
+        setPriceFilterState("priceOver200", !priceOver200);
+        applyFilters();
+      },
+      applyFilters: () => {
+        const { priceFilterState, originalProducts } = get();
+
+        const allFiltersFalse =
+          !priceFilterState.priceUnder100 &&
+          !priceFilterState.price100to150 &&
+          !priceFilterState.price150to200 &&
+          !priceFilterState.priceOver200;
+
+        if (allFiltersFalse) {
+          set({ products: originalProducts });
+          return;
+        }
+
+        const filteredProducts: Product[] = [];
+
+        if (priceFilterState.priceUnder100) {
+          const filteredUnder100 = originalProducts.filter(
+            (product: Product) => product.price! < 100
+          );
+          filteredProducts.push(...filteredUnder100);
+        }
+
+        if (priceFilterState.price100to150) {
+          const filtered100to150 = originalProducts.filter(
+            (product: Product) => product.price! >= 100 && product.price! < 150
+          );
+          filteredProducts.push(...filtered100to150);
+        }
+
+        if (priceFilterState.price150to200) {
+          const filtered150to200 = originalProducts.filter(
+            (product: Product) => product.price! >= 150 && product.price! < 200
+          );
+          filteredProducts.push(...filtered150to200);
+        }
+
+        if (priceFilterState.priceOver200) {
+          const filteredOver200 = originalProducts.filter(
+            (product: Product) => product.price! >= 200
+          );
+          filteredProducts.push(...filteredOver200);
+        }
+
+        set({ products: filteredProducts });
+      },
     }),
+
     { name: "product-storage" }
   )
 );

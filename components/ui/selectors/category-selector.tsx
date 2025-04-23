@@ -38,15 +38,15 @@ const CategoriesSelectorComponent = ({ categories }: CategorySelectorProps) => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full max-w-full relative flex justify-between sm:flex-none items-center bg-gray-100 text-black font-bold py-2 px-4 border-none shadow-none cursor-pointer"
+          className="w-full max-w-full relative flex sm:flex-none items-center bg-gray-100 text-black font-bold py-2 px-4 border-none shadow-none cursor-pointer"
         >
           {value
             ? categories.find((category) => category._id === value)?.title
-            : "Filter by Category"}
+            : "Select Category"}
           {open ? (
-            <ChevronUp className="ml-2 h-4 w-4 shrink-0" />
+            <ChevronUp className="mt-1 h-4 w-4 shrink-0" />
           ) : (
-            <ChevronDown className="ml-2 h-4 w-4 shrink-0" />
+            <ChevronDown className="mt-1 h-4 w-4 shrink-0" />
           )}
         </Button>
       </PopoverTrigger>
