@@ -7,13 +7,14 @@ import PriceSelectorComponent from "../ui/selectors/price-selector";
 import ProductGrid from "./ProductGrid";
 
 import useProductsStore from "@/store/productsStore";
+import { Button } from "../ui/button";
 
 interface ProductsViewProps {
   productsArray: Product[];
 }
 
 const ProductsView = ({ productsArray }: ProductsViewProps) => {
-  const { products, setProducts } = useProductsStore();
+  const { products, setProducts, resetAllFilters } = useProductsStore();
 
   useEffect(() => {
     setProducts(productsArray);
@@ -26,6 +27,12 @@ const ProductsView = ({ productsArray }: ProductsViewProps) => {
         <PriceSelectorComponent />
       </div>
       <hr className="my-1 border-gray-300" />
+      <Button
+        className="self-start sm:mt-0 md:-mt-4 bg-gray-100 text-black font-semibold hover:bg-gray-100 border-none shadow-none text-sm cursor-pointer"
+        onClick={() => resetAllFilters()}
+      >
+        Reset All Filters
+      </Button>
 
       <div className="flex-1">
         <div>

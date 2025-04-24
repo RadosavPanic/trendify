@@ -5,7 +5,6 @@ import { persist } from "zustand/middleware";
 export type ProductState = {
   products: Product[];
   originalProducts: Product[];
-  priceSelectorOpen: boolean;
   priceFilterState: {
     priceUnder100: boolean;
     price100to150: boolean;
@@ -13,7 +12,6 @@ export type ProductState = {
     priceOver200: boolean;
   };
   setProducts: (products: Product[]) => void;
-  togglePriceSelectorOpen: () => void;
   setPriceFilterState: (
     key: keyof ProductState["priceFilterState"],
     value: boolean
@@ -23,6 +21,7 @@ export type ProductState = {
   filterPrice150to200: () => void;
   filterPriceOver200: () => void;
   applyFilters: () => void;
+  resetAllFilters: () => void;
 };
 
 const useProductsStore = create<ProductState>()(
@@ -30,7 +29,6 @@ const useProductsStore = create<ProductState>()(
     (set, get) => ({
       products: [],
       originalProducts: [],
-      priceSelectorOpen: false,
       priceFilterState: {
         priceUnder100: false,
         price100to150: false,
@@ -39,8 +37,7 @@ const useProductsStore = create<ProductState>()(
       },
       setProducts: (products: Product[]) =>
         set({ originalProducts: products, products: products }),
-      togglePriceSelectorOpen: () =>
-        set((state) => ({ priceSelectorOpen: !state.priceSelectorOpen })),
+
       setPriceFilterState: (key, value) =>
         set((state) => ({
           priceFilterState: { ...state.priceFilterState, [key]: value },
@@ -126,7 +123,24 @@ const useProductsStore = create<ProductState>()(
           filteredProducts.push(...filteredOver200);
         }
 
+        if (filteredProducts.length === 0) {
+          set({ products: originalProducts });
+          return;
+        }
+
         set({ products: filteredProducts });
+      },
+      resetAllFilters: () => {
+        const { originalProducts } = get();
+        set({
+          products: originalProducts,
+          priceFilterState: {
+            priceUnder100: false,
+            price100to150: false,
+            price150to200: false,
+            priceOver200: false,
+          },
+        });
       },
     }),
 

@@ -13,6 +13,7 @@ import {
 import { Command, CommandItem, CommandList } from "@/components/ui/command";
 
 import useProductsStore from "@/store/productsStore";
+import { useState } from "react";
 
 const PriceSelectorComponent = () => {
   const {
@@ -20,59 +21,94 @@ const PriceSelectorComponent = () => {
     filterPrice100to150,
     filterPrice150to200,
     filterPriceOver200,
-    priceSelectorOpen,
-    togglePriceSelectorOpen,
     priceFilterState,
   } = useProductsStore();
 
+  const [priceSelectorOpen, setPriceSelectorOpen] = useState(false);
+
+  const togglePriceSelectorOpen = () => {
+    setPriceSelectorOpen((prev) => !prev);
+  };
+
   return (
-    <Popover>
+    <Popover open={priceSelectorOpen} onOpenChange={setPriceSelectorOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
-          role="combobox"
+          size={null}
           aria-expanded={priceSelectorOpen}
-          onSelect={togglePriceSelectorOpen}
-          className="w-full max-w-full relative flex sm:flex-none items-center bg-gray-100 text-black font-bold py-2 px-4 border-none shadow-none cursor-pointer"
+          onClick={togglePriceSelectorOpen}
+          className="w-36 relative flex sm:flex-none items-center bg-gray-100 text-black hover:bg-gray-100  border-black shadow-none font-semibold text-md py-1 cursor-pointer"
         >
           Shop By Price
           {priceSelectorOpen ? (
-            <ChevronDown className="mt-1 h-4 w-4 shrink-0" />
-          ) : (
             <ChevronUp className="mt-1 h-4 w-4 shrink-0" />
+          ) : (
+            <ChevronDown className="mt-1 h-4 w-4 shrink-0" />
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="w-full p-2">
         <Command>
           <CommandList>
-            <CommandItem onSelect={() => filterPriceUnder100()}>
+            <CommandItem
+              onSelect={() => {
+                filterPriceUnder100();
+                document.getElementById("chkPriceUnder100")?.click();
+              }}
+            >
               <Checkbox
                 id="chkPriceUnder100"
                 checked={priceFilterState.priceUnder100}
+                onCheckedChange={() => filterPriceUnder100()}
               />
-              <Label htmlFor="chkPriceUnder100">Under €100</Label>
+              <Label htmlFor="chkPriceUnder100" className="text-sm">
+                Under €100
+              </Label>
             </CommandItem>
-            <CommandItem onSelect={() => filterPrice100to150()}>
+            <CommandItem
+              onSelect={() => {
+                filterPrice100to150();
+                document.getElementById("chkPrice100to150")?.click();
+              }}
+            >
               <Checkbox
                 id="chkPrice100to150"
                 checked={priceFilterState.price100to150}
+                onCheckedChange={() => filterPrice100to150()}
               />
-              <Label htmlFor="chkPrice100to150">€100 - €150</Label>
+              <Label htmlFor="chkPrice100to150" className="text-sm">
+                €100 - €150
+              </Label>
             </CommandItem>
-            <CommandItem onSelect={() => filterPrice150to200()}>
+            <CommandItem
+              onSelect={() => {
+                filterPrice150to200();
+                document.getElementById("chkPrice150to200")?.click();
+              }}
+            >
               <Checkbox
                 id="chkPrice150to200"
                 checked={priceFilterState.price150to200}
+                onCheckedChange={() => filterPrice150to200()}
               />
-              <Label htmlFor="chkPrice150to200">€150 - €200</Label>
+              <Label htmlFor="chkPrice150to200" className="text-sm">
+                €150 - €200
+              </Label>
             </CommandItem>
-            <CommandItem onSelect={() => filterPriceOver200()}>
+            <CommandItem
+              onSelect={() => {
+                filterPriceOver200();
+                document.getElementById("chkPriceOver200")?.click();
+              }}
+            >
               <Checkbox
                 id="chkPriceOver200"
                 checked={priceFilterState.priceOver200}
+                onCheckedChange={() => filterPriceOver200()}
               />
-              <Label htmlFor="chkPriceOver200">Over €200</Label>
+              <Label htmlFor="chkPriceOver200" className="text-sm">
+                Over €200
+              </Label>
             </CommandItem>
           </CommandList>
         </Command>
