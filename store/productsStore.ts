@@ -11,11 +11,21 @@ export type ProductState = {
     price150to200: boolean;
     priceOver200: boolean;
   };
+  sortState: {
+    priceAscending: boolean;
+    priceDescending: boolean;
+    alphabetical: boolean;
+  };
+  setSortState: (key: keyof ProductState["sortState"]) => void;
   setProducts: (products: Product[]) => void;
   setPriceFilterState: (
     key: keyof ProductState["priceFilterState"],
     value: boolean
   ) => void;
+  sortByPriceAscending: () => void;
+  sortByPriceDescending: () => void;
+  sortByName: () => void;
+
   filterPriceUnder100: () => void;
   filterPrice100to150: () => void;
   filterPrice150to200: () => void;
@@ -141,6 +151,49 @@ const useProductsStore = create<ProductState>()(
             priceOver200: false,
           },
         });
+      },
+      sortState: {
+        priceAscending: false,
+        priceDescending: false,
+        alphabetical: false,
+      },
+
+      setSortState: (key: keyof ProductState["sortState"]) => {
+        set({
+          sortState: {
+            priceAscending: false,
+            priceDescending: false,
+            alphabetical: false,
+            [key]: true,
+          },
+        });
+      },
+
+      sortByPriceAscending: () => {
+        const { products, setSortState } = get();
+        const sortedProducts = [...products].sort(
+          (a, b) => a.price! - b.price!
+        );
+        setSortState("priceAscending");
+        set({ products: sortedProducts });
+      },
+
+      sortByPriceDescending: () => {
+        const { products, setSortState } = get();
+        const sortedProducts = [...products].sort(
+          (a, b) => b.price! - a.price!
+        );
+        setSortState("priceDescending");
+        set({ products: sortedProducts });
+      },
+
+      sortByName: () => {
+        const { products, setSortState } = get();
+        const sortedProducts = [...products].sort((a, b) =>
+          a.name!.localeCompare(b.name!)
+        );
+        setSortState("alphabetical");
+        set({ products: sortedProducts });
       },
     }),
 

@@ -8,6 +8,7 @@ import ProductGrid from "./ProductGrid";
 
 import useProductsStore from "@/store/productsStore";
 import { Button } from "../ui/button";
+import SortSelectorComponent from "../ui/selectors/sort-selector";
 
 interface ProductsViewProps {
   productsArray: Product[];
@@ -23,7 +24,8 @@ const ProductsView = ({ productsArray }: ProductsViewProps) => {
   return (
     <div className="flex flex-col sm:gap-4 sm:mx-0 lg:mx-40 mt-10">
       <hr className="my-1 border-gray-300" />
-      <div className="w-[200px] flex flex-row gap-10">
+      <div className="w-[200px] flex flex-row gap-3">
+        <SortSelectorComponent />
         <PriceSelectorComponent />
       </div>
       <hr className="my-1 border-gray-300" />
