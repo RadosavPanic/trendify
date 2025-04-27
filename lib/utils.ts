@@ -13,6 +13,7 @@ export const sortMap = {
   priceAscending: "priceAscending",
   priceDescending: "priceDescending",
   alphabetical: "alphabetical",
+  reverseAlphabetical: "reverseAlphabetical",
 } as const;
 
 export const priceMap = {
@@ -20,4 +21,15 @@ export const priceMap = {
   price100to150: "price100to150",
   price150to200: "price150to200",
   priceOver200: "priceOver200",
+} as const;
+
+export const filterDisplayNames = {
+  priceUnder100: "< €100",
+  price100to150: "€100 - €150",
+  price150to200: "€150 - €200",
+  priceOver200: "> €200",
+  priceAscending: "price asc",
+  priceDescending: "price desc",
+  alphabetical: "name a-z",
+  reverseAlphabetical: "name z-a",
 } as const;

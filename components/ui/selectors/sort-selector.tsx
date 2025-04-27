@@ -20,8 +20,13 @@ import useProductsStore from "@/store/productsStore";
 import { useState } from "react";
 
 const SortSelectorComponent = () => {
-  const { sortByPriceAscending, sortByPriceDescending, sortByName, sortState } =
-    useProductsStore();
+  const {
+    sortByPriceAscending,
+    sortByPriceDescending,
+    sortByNameAtoZ,
+    sortByNameZtoA,
+    sortState,
+  } = useProductsStore();
 
   const [sortSelectorOpen, setSortSelectorOpen] = useState(false);
 
@@ -76,10 +81,18 @@ const SortSelectorComponent = () => {
               </Label>
             </CommandItem>
             <CommandItem
-              onSelect={sortByName}
+              onSelect={sortByNameAtoZ}
               className={sortState.alphabetical ? "bg-blue-900 text-white" : ""}
             >
-              <Label className="text-md">Alphabetical</Label>
+              <Label className="text-md">Name A-Z</Label>
+            </CommandItem>
+            <CommandItem
+              onSelect={sortByNameZtoA}
+              className={
+                sortState.reverseAlphabetical ? "bg-blue-900 text-white" : ""
+              }
+            >
+              <Label className="text-md">Name Z-A</Label>
             </CommandItem>
           </CommandList>
         </Command>

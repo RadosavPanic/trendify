@@ -1,15 +1,10 @@
 import { Badge } from "./ui/badge";
 import useProductsStore from "@/store/productsStore";
-import { priceMap, sortMap } from "@/lib/utils";
+import { priceMap, sortMap, filterDisplayNames } from "@/lib/utils";
 
 const ActiveFilterBadge = () => {
-  const {
-    activeFilters,
-    setPriceState,
-    setSortState,
-    applySortFilter,
-    applyPriceFilters,
-  } = useProductsStore((state) => state);
+  const { activeFilters, setPriceState, setSortState, applyPriceFilters } =
+    useProductsStore((state) => state);
 
   const removeFilter = (filter: string) => {
     if (filter in priceMap) {
@@ -20,8 +15,13 @@ const ActiveFilterBadge = () => {
       setSortState(sortMap[filter as keyof typeof sortMap], false);
     }
 
-    applySortFilter();
     applyPriceFilters();
+  };
+
+  const getDisplayName = (filter: string) => {
+    return (
+      filterDisplayNames[filter as keyof typeof filterDisplayNames] || filter
+    );
   };
 
   return (
@@ -33,7 +33,7 @@ const ActiveFilterBadge = () => {
           key={filter}
           onClick={() => removeFilter(filter)}
         >
-          {filter} <span className="ml-1">x</span>
+          {getDisplayName(filter)} <span className="ml-1">x</span>
         </Badge>
       ))}
     </div>

@@ -17,6 +17,7 @@ export type ProductState = {
     priceAscending: boolean;
     priceDescending: boolean;
     alphabetical: boolean;
+    reverseAlphabetical: boolean;
   };
   setProducts: (products: Product[]) => void;
 
@@ -28,7 +29,8 @@ export type ProductState = {
 
   sortByPriceAscending: () => void;
   sortByPriceDescending: () => void;
-  sortByName: () => void;
+  sortByNameAtoZ: () => void;
+  sortByNameZtoA: () => void;
 
   filterPriceUnder100: () => void;
   filterPrice100to150: () => void;
@@ -61,6 +63,7 @@ const useProductsStore = create<ProductState>()(
         priceAscending: false,
         priceDescending: false,
         alphabetical: false,
+        reverseAlphabetical: false,
       },
 
       setProducts: (products: Product[]) =>
@@ -79,6 +82,7 @@ const useProductsStore = create<ProductState>()(
             priceAscending: key === "priceAscending" && value,
             priceDescending: key === "priceDescending" && value,
             alphabetical: key === "alphabetical" && value,
+            reverseAlphabetical: key === "reverseAlphabetical" && value,
           },
           activeFilters: value ? [...newFilters, sortMap[key]] : newFilters,
         });
@@ -113,10 +117,16 @@ const useProductsStore = create<ProductState>()(
         setSortState("priceDescending", !sortState.priceDescending);
       },
 
-      sortByName: () => {
+      sortByNameAtoZ: () => {
         const { sortState, setSortState } = get();
 
         setSortState("alphabetical", !sortState.alphabetical);
+      },
+
+      sortByNameZtoA: () => {
+        const { sortState, setSortState } = get();
+
+        setSortState("reverseAlphabetical", !sortState.reverseAlphabetical);
       },
 
       filterPriceUnder100: () => {
@@ -156,7 +166,17 @@ const useProductsStore = create<ProductState>()(
       },
 
       applySortFilter: () => {
-        const { products, sortState } = get();
+        const { products, sortState, applyPriceFilters } = get();
+
+        if (
+          !sortState.priceAscending &&
+          !sortState.priceDescending &&
+          !sortState.alphabetical &&
+          !sortState.reverseAlphabetical
+        ) {
+          applyPriceFilters();
+          return;
+        }
 
         if (sortState.priceAscending) {
           set({
@@ -180,6 +200,15 @@ const useProductsStore = create<ProductState>()(
           });
           return;
         }
+
+        if (sortState.reverseAlphabetical) {
+          set({
+            products: [...products].sort((a, b) =>
+              b.name!.localeCompare(a.name!)
+            ),
+          });
+          return;
+        }
       },
 
       applyPriceFilters: () => {
@@ -191,6 +220,8 @@ const useProductsStore = create<ProductState>()(
             price150to200,
             priceOver200,
           },
+          sortState,
+          applySortFilter,
         } = get();
 
         if (
@@ -200,6 +231,16 @@ const useProductsStore = create<ProductState>()(
           !priceOver200
         ) {
           set({ products: originalProducts });
+
+          if (
+            sortState.priceAscending ||
+            sortState.priceDescending ||
+            sortState.alphabetical ||
+            sortState.reverseAlphabetical
+          ) {
+            applySortFilter();
+          }
+
           return;
         }
 
@@ -235,6 +276,15 @@ const useProductsStore = create<ProductState>()(
         }
 
         set({ products: filteredProducts });
+
+        if (
+          sortState.priceAscending ||
+          sortState.priceDescending ||
+          sortState.alphabetical ||
+          sortState.reverseAlphabetical
+        ) {
+          applySortFilter();
+        }
       },
 
       resetSortState: () => {
@@ -243,6 +293,7 @@ const useProductsStore = create<ProductState>()(
             priceAscending: false,
             priceDescending: false,
             alphabetical: false,
+            reverseAlphabetical: false,
           },
         });
       },
