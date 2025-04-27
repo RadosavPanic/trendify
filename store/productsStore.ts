@@ -1,7 +1,7 @@
 import { Product } from "@/sanity.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { sortMap, priceMap } from "@/lib/utils";
+import { sortMap, priceMap } from "../lib/utils";
 
 export type ProductState = {
   products: Product[];
@@ -36,6 +36,8 @@ export type ProductState = {
   filterPrice100to150: () => void;
   filterPrice150to200: () => void;
   filterPriceOver200: () => void;
+
+  anySortingFilterActive: () => boolean;
 
   applyPriceFilters: () => void;
   applySortFilter: () => void;
@@ -220,7 +222,7 @@ const useProductsStore = create<ProductState>()(
             price150to200,
             priceOver200,
           },
-          sortState,
+          anySortingFilterActive,
           applySortFilter,
         } = get();
 
@@ -232,14 +234,7 @@ const useProductsStore = create<ProductState>()(
         ) {
           set({ products: originalProducts });
 
-          if (
-            sortState.priceAscending ||
-            sortState.priceDescending ||
-            sortState.alphabetical ||
-            sortState.reverseAlphabetical
-          ) {
-            applySortFilter();
-          }
+          if (anySortingFilterActive()) applySortFilter();
 
           return;
         }
@@ -272,19 +267,24 @@ const useProductsStore = create<ProductState>()(
 
         if (!filteredProducts.length) {
           set({ products: originalProducts });
+
+          if (anySortingFilterActive()) applySortFilter();
           return;
         }
 
         set({ products: filteredProducts });
 
-        if (
+        if (anySortingFilterActive()) applySortFilter();
+      },
+
+      anySortingFilterActive: () => {
+        const { sortState } = get();
+        return (
           sortState.priceAscending ||
           sortState.priceDescending ||
           sortState.alphabetical ||
           sortState.reverseAlphabetical
-        ) {
-          applySortFilter();
-        }
+        );
       },
 
       resetSortState: () => {

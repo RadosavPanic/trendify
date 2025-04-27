@@ -177,12 +177,12 @@ describe("Products Store", () => {
   const { getState } = useProductsStore;
 
   beforeEach(() => {
-    const { setProducts, setPriceFilterState } = getState();
+    const { setProducts, setPriceState } = getState();
     setProducts(mockProducts);
-    setPriceFilterState("priceUnder100", false);
-    setPriceFilterState("price100to150", false);
-    setPriceFilterState("price150to200", false);
-    setPriceFilterState("priceOver200", false);
+    setPriceState("priceUnder100", false);
+    setPriceState("price100to150", false);
+    setPriceState("price150to200", false);
+    setPriceState("priceOver200", false);
   });
 
   describe("Fundamentals", () => {
@@ -192,13 +192,13 @@ describe("Products Store", () => {
     });
 
     it("should toggle filter state correctly", () => {
-      const { setPriceFilterState } = getState();
+      const { setPriceState } = getState();
 
-      setPriceFilterState("priceUnder100", true);
-      expect(getState().priceFilterState.priceUnder100).toBe(true);
+      setPriceState("priceUnder100", true);
+      expect(getState().priceState.priceUnder100).toBe(true);
 
-      setPriceFilterState("priceUnder100", false);
-      expect(getState().priceFilterState.priceUnder100).toBe(false);
+      setPriceState("priceUnder100", false);
+      expect(getState().priceState.priceUnder100).toBe(false);
     });
   });
 
@@ -232,11 +232,11 @@ describe("Products Store", () => {
     });
 
     it("should apply multiple filters correctly", () => {
-      const { setPriceFilterState, applyFilters } = getState();
+      const { setPriceState, applyPriceFilters } = getState();
 
-      setPriceFilterState("priceUnder100", true);
-      setPriceFilterState("priceOver200", true);
-      applyFilters();
+      setPriceState("priceUnder100", true);
+      setPriceState("priceOver200", true);
+      applyPriceFilters();
 
       expect(getState().products).toEqual([mockProducts[0], mockProducts[3]]);
     });

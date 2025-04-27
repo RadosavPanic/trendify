@@ -23,11 +23,20 @@ const ProductsView = ({
   allCategories,
   categorySlug,
 }: ProductsViewProps) => {
-  const { products, setProducts, resetAllFilters } = useProductsStore();
+  const {
+    products,
+    setProducts,
+    resetAllFilters,
+    applyPriceFilters,
+    applySortFilter,
+  } = useProductsStore();
 
   useEffect(() => {
     setProducts(productsArray);
-  }, [productsArray, setProducts]);
+
+    applyPriceFilters();
+    applySortFilter();
+  }, [productsArray, setProducts, applyPriceFilters, applySortFilter]);
 
   const selectedCategory = allCategories.find(
     (category) => category?.slug?.current === categorySlug
