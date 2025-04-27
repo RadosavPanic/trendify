@@ -1,6 +1,11 @@
 "use client";
 
-import { ChevronUp, ChevronDown } from "lucide-react";
+import {
+  ChevronUp,
+  ChevronDown,
+  ArrowUpNarrowWide,
+  ArrowDownNarrowWide,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -20,7 +25,7 @@ const SortSelectorComponent = () => {
 
   const [sortSelectorOpen, setSortSelectorOpen] = useState(false);
 
-  const togglePriceSelectorOpen = () => {
+  const toggleSortSelectorOpen = () => {
     setSortSelectorOpen((prev) => !prev);
   };
 
@@ -30,8 +35,8 @@ const SortSelectorComponent = () => {
         <Button
           size={null}
           aria-expanded={sortSelectorOpen}
-          onClick={togglePriceSelectorOpen}
-          className="w-36 relative flex sm:flex-none items-center bg-gray-100 text-black hover:bg-gray-100  border-black shadow-none font-semibold text-md py-1 cursor-pointer"
+          onClick={toggleSortSelectorOpen}
+          className="relative flex sm:flex-none items-center bg-gray-100 text-black hover:bg-gray-100  border-black shadow-none font-semibold text-md py-1 ml-2 cursor-pointer"
         >
           Sort By
           {sortSelectorOpen ? (
@@ -41,30 +46,40 @@ const SortSelectorComponent = () => {
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-2">
+      <PopoverContent className="w-full p-2 bg-white">
         <Command>
           <CommandList>
             <CommandItem
               onSelect={sortByPriceAscending}
               className={
-                sortState.priceAscending ? "bg-gray-600 text-white" : ""
+                sortState.priceAscending ? "bg-blue-900 text-white" : ""
               }
             >
-              <Label className="text-sm">Price Ascending</Label>
+              <Label className="text-md flex w-full justify-between items-center">
+                <span className="items-start">Price Asc</span>
+                <ArrowUpNarrowWide
+                  className={`h-4 w-4 items-end ${sortState.priceAscending && "text-white"}`}
+                />
+              </Label>
             </CommandItem>
             <CommandItem
               onSelect={sortByPriceDescending}
               className={
-                sortState.priceDescending ? "bg-gray-600 text-white" : ""
+                sortState.priceDescending ? "bg-blue-900 text-white" : ""
               }
             >
-              <Label className="text-sm">Price Descending</Label>
+              <Label className="text-md flex flex-row">
+                <span className="items-center justify-start">Price Desc</span>
+                <ArrowDownNarrowWide
+                  className={`h-4 w-4 items-end ${sortState.priceDescending && "text-white"}`}
+                />
+              </Label>
             </CommandItem>
             <CommandItem
               onSelect={sortByName}
-              className={sortState.alphabetical ? "bg-gray-600 text-white" : ""}
+              className={sortState.alphabetical ? "bg-blue-900 text-white" : ""}
             >
-              <Label className="text-sm">Alphabetical</Label>
+              <Label className="text-md">Alphabetical</Label>
             </CommandItem>
           </CommandList>
         </Command>

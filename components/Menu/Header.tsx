@@ -65,7 +65,7 @@ const Header = () => {
             </div>
           ) : (
             <SignInButton mode="modal">
-              <div className="flex items-center space-x-2 sm:-mr-2 lg:mr-4 cursor-pointer">
+              <div className="flex items-center sm:space-x-0 md:space-x-2 sm:mr-4 lg:mr-4 cursor-pointer">
                 <FaRegUser className="w-6 h-6" />
                 <div className="hidden md:block text-xs">
                   <p className="text-gray-700">Welcome</p>
@@ -78,10 +78,10 @@ const Header = () => {
 
         <Link
           href="/cart"
-          className="relative group flex justify-center sm:justify-start sm:flex-none items-center -space-x-1 font-bold py-2 px-2 pr-1 pl-2.5 lg:px-2.5 rounded"
+          className="relative group flex justify-center sm:justify-start sm:flex-none items-center -space-x-1 font-bold py-2 px-2 pr-1 pl-0 rounded"
         >
           <TrolleyIcon className="w-10 h-10" />
-          <span className="absolute top-1 -right-2 lg:top-1 lg:right-4 bg-black text-white group-hover:bg-blue-700 rounded-full w-6 h-4.5 flex items-center justify-center text-xs">
+          <span className="absolute top-1 -right-2 lg:top-1 lg:right-2.5 bg-black text-white group-hover:bg-blue-700 rounded-full w-6 h-4.5 flex items-center justify-center text-xs">
             {itemCount}
           </span>
           <span className="hidden lg:inline text-sm pt-1">Cart</span>

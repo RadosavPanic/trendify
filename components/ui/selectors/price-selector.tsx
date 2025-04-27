@@ -21,7 +21,7 @@ const PriceSelectorComponent = () => {
     filterPrice100to150,
     filterPrice150to200,
     filterPriceOver200,
-    priceFilterState,
+    priceState,
   } = useProductsStore();
 
   const [priceSelectorOpen, setPriceSelectorOpen] = useState(false);
@@ -37,7 +37,7 @@ const PriceSelectorComponent = () => {
           size={null}
           aria-expanded={priceSelectorOpen}
           onClick={togglePriceSelectorOpen}
-          className="w-36 relative flex sm:flex-none items-center bg-gray-100 text-black hover:bg-gray-100  border-black shadow-none font-semibold text-md py-1 cursor-pointer"
+          className="relative flex sm:flex-none items-center bg-gray-100 text-black hover:bg-gray-100  border-black shadow-none font-semibold text-md py-1 ml-2 cursor-pointer"
         >
           Shop By Price
           {priceSelectorOpen ? (
@@ -58,7 +58,7 @@ const PriceSelectorComponent = () => {
             >
               <Checkbox
                 id="chkPriceUnder100"
-                checked={priceFilterState.priceUnder100}
+                checked={priceState.priceUnder100}
                 onCheckedChange={() => filterPriceUnder100()}
               />
               <Label htmlFor="chkPriceUnder100" className="text-sm">
@@ -73,7 +73,7 @@ const PriceSelectorComponent = () => {
             >
               <Checkbox
                 id="chkPrice100to150"
-                checked={priceFilterState.price100to150}
+                checked={priceState.price100to150}
                 onCheckedChange={() => filterPrice100to150()}
               />
               <Label htmlFor="chkPrice100to150" className="text-sm">
@@ -88,7 +88,7 @@ const PriceSelectorComponent = () => {
             >
               <Checkbox
                 id="chkPrice150to200"
-                checked={priceFilterState.price150to200}
+                checked={priceState.price150to200}
                 onCheckedChange={() => filterPrice150to200()}
               />
               <Label htmlFor="chkPrice150to200" className="text-sm">
@@ -103,7 +103,7 @@ const PriceSelectorComponent = () => {
             >
               <Checkbox
                 id="chkPriceOver200"
-                checked={priceFilterState.priceOver200}
+                checked={priceState.priceOver200}
                 onCheckedChange={() => filterPriceOver200()}
               />
               <Label htmlFor="chkPriceOver200" className="text-sm">
