@@ -13,18 +13,25 @@ type MenuState = {
   isMenuOpen: boolean;
   isLinkActive: boolean;
   menuOption: MenuOptions;
+  recentSearches: string[];
+  searchQuery: string;
   openMenu: (event: React.MouseEvent<HTMLDivElement>) => void;
   closeMenu: () => void;
   activateUnderline: () => void;
   deactivateUnderline: () => void;
+  setSearchQuery: (query: string) => void;
+  addQueryToRecentSearches: (query: string) => void;
+  removeQueryFromRecentSearches: (query: string) => void;
 };
 
 const useMenuStore = create<MenuState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       isMenuOpen: false,
       isLinkActive: false,
       menuOption: MenuOptions.default,
+      recentSearches: [],
+      searchQuery: "",
       openMenu: (event: React.MouseEvent<HTMLDivElement>) => {
         const option = event.currentTarget.dataset.option as MenuOptions;
         set({
@@ -46,6 +53,28 @@ const useMenuStore = create<MenuState>()(
         set({
           isLinkActive: false,
         });
+      },
+      setSearchQuery: (query: string) => {
+        set({ searchQuery: query });
+      },
+      addQueryToRecentSearches: (query: string) => {
+        const { recentSearches } = get();
+
+        const existingIndex = recentSearches.indexOf(query);
+
+        const updatedSearches =
+          existingIndex !== -1
+            ? [...recentSearches.filter((item) => item !== query), query]
+            : [...recentSearches, query];
+
+        if (updatedSearches.length > 5) updatedSearches.shift();
+
+        set({ recentSearches: updatedSearches });
+      },
+      removeQueryFromRecentSearches: (query: string) => {
+        const { recentSearches } = get();
+        const updatedSearches = recentSearches.filter((item) => item !== query);
+        set({ recentSearches: updatedSearches });
       },
     }),
     {
