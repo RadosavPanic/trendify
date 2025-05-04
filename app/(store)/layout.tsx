@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import "../globals.css";
+
+import { draftMode } from "next/headers";
 import { ClerkProvider } from "@clerk/nextjs";
-import Header from "@/components/Menu/Header";
+
 import { SanityLive } from "@/sanity/lib/live";
 import { VisualEditing } from "next-sanity";
-import { draftMode } from "next/headers";
+
 import DisableDraftMode from "@/components/DisableDraftMode";
+import Header from "@/components/Menu/Header";
+import SpringSaleBanner from "@/components/SpringSaleBanner";
 
 export const metadata: Metadata = {
   title: "Trendify - Shop Smart, Dress Sharp - Fashion You Love at Fair Prices",
@@ -30,6 +34,7 @@ export default async function RootLayout({
 
           <main>
             <Header />
+            <SpringSaleBanner />
             {children}
           </main>
 

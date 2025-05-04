@@ -42,7 +42,7 @@ const Header = () => {
         />
       )}
 
-      <header className="relative flex w-full flex-wrap justify-between items-center h-16 px-4">
+      <header className="headerElement relative flex w-full flex-wrap justify-between items-center h-16 px-4">
         <Link
           href="/"
           className="flex items-center space-x-2 h-16 text-blue-500"
