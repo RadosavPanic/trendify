@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 
 import {
   Carousel,
@@ -9,19 +10,43 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import Image from "next/image";
-
-import Image1 from "@/public/banner-pic-1.jpg";
-import Image2 from "@/public/banner-pic-2.jpg";
-import Image3 from "@/public/banner-pic-3.jpg";
 import { Progress } from "../ui/progress";
+
+import Banner1Lg from "@/public/banner-pic-1-lg.jpg";
+import Banner1Sm from "@/public/banner-pic-1-sm.jpg";
+
+import Banner2Lg from "@/public/banner-pic-2-lg.jpg";
+import Banner2Sm from "@/public/banner-pic-2-sm.jpg";
+
+import Banner3Lg from "@/public/banner-pic-3-lg.jpg";
+import Banner3Sm from "@/public/banner-pic-3-sm.jpg";
 
 const HomeCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [progress, setProgress] = useState(0);
 
-  const images = [Image1, Image2, Image3];
+  const imagesLg = [Banner1Lg, Banner2Lg, Banner3Lg];
+  const imagesSm = [Banner1Sm, Banner3Sm, Banner2Sm];
+
+  const [images, setImages] = useState(imagesLg);
+
+  useEffect(() => {
+    const updateImages = () => {
+      if (window.innerWidth < 768) {
+        setImages(imagesSm);
+      } else {
+        setImages(imagesLg);
+      }
+    };
+
+    updateImages();
+    window.addEventListener("resize", updateImages);
+
+    return () => {
+      window.removeEventListener("resize", updateImages);
+    };
+  }, []);
 
   useEffect(() => {
     if (!api) return;
@@ -71,12 +96,12 @@ const HomeCarousel = () => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-1/3 max-w-[400px] flex space-x-1">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-1/2 flex space-x-1">
         {images.map((_, index) => (
           <Progress
             key={index}
             value={index === current ? progress : 0}
-            className="h-1 flex-1 mx-1 bg-gray-300"
+            className="h-0.5 flex-1 mx-1 bg-gray-300"
           />
         ))}
       </div>
