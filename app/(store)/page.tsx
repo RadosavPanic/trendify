@@ -1,12 +1,13 @@
 import HomeCarousel from "@/components/Carousel/HomeCarousel";
-
-export const dynamic = "force-static";
-export const revalidate = 1800;
+import FeaturedProducts from "@/components/Products/FeaturedProducts";
 
 const Home = () => {
   return (
     <div>
       <HomeCarousel />
+
+      <FeaturedProducts category="shoes" columnLayout="reversed" />
+      <FeaturedProducts category="clothing" rowLayout="reversed" />
     </div>
   );
 };

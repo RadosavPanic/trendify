@@ -11,11 +11,12 @@ import { Button } from "../ui/button";
 import SortSelectorComponent from "../ui/selectors/sort-selector";
 import { capitalizeCase } from "@/lib/utils";
 import ActiveFilterBadge from "../ActiveFilterBadge";
+import Link from "next/link";
 
 interface ProductsViewProps {
   productsArray: Product[];
-  allCategories: Category[];
-  categorySlug: string;
+  allCategories?: Category[];
+  categorySlug?: string;
 }
 
 const ProductsView = ({
@@ -38,7 +39,7 @@ const ProductsView = ({
     applySortFilter();
   }, [productsArray, setProducts, applyPriceFilters, applySortFilter]);
 
-  const selectedCategory = allCategories.find(
+  const selectedCategory = allCategories?.find(
     (category) => category?.slug?.current === categorySlug
   );
 
@@ -51,19 +52,27 @@ const ProductsView = ({
   return (
     <div className="flex flex-col sm:gap-4 sm:mx-0 lg:mx-40 mt-10">
       <div className="sm:w-full xl:w-1/2 flex flex-col items-start justify-center gap-2 ml-1 mb-2">
-        <p className="font-semibold">
-          {categorySlice.length < 3
-            ? `${categorySlice[0]} / ${categorySlice[1]}`
-            : `${categorySlice[0]} / ${categorySlice[2]} ${categorySlice[1]}`}{" "}
-        </p>
-        <p className="font-normal">{selectedCategory?.description}</p>
+        {selectedCategory ? (
+          <>
+            <p className="font-semibold">
+              {categorySlice.length < 3
+                ? `${categorySlice[0]} / ${categorySlice[1]}`
+                : `${categorySlice[0]} / ${categorySlice[2]} ${categorySlice[1]}`}{" "}
+            </p>
+            <p className="font-normal">{selectedCategory?.description}</p>
+          </>
+        ) : (
+          <p>
+            <Link href="/">Trendify - Online Shop</Link> / Products
+          </p>
+        )}
       </div>
-      <hr className="my-1 border-gray-300" />
+      <hr className="border-gray-300" />
       <div className="w-full flex flex-row gap-3">
         <SortSelectorComponent />
         <PriceSelectorComponent />
       </div>
-      <hr className="my-1 border-gray-300" />
+      <hr className="border-gray-300" />
       <Button
         size={null}
         className="self-start sm:mt-0 md:-mt-4 bg-gray-100 text-black font-semibold hover:bg-gray-100 border-none shadow-none text-sm py-1 px-1 cursor-pointer"

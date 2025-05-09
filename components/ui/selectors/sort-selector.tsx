@@ -41,7 +41,7 @@ const SortSelectorComponent = () => {
           size={null}
           aria-expanded={sortSelectorOpen}
           onClick={toggleSortSelectorOpen}
-          className="relative flex sm:flex-none items-center bg-gray-100 text-black hover:bg-gray-100  border-black shadow-none font-semibold text-md py-1 ml-2 cursor-pointer"
+          className="relative flex sm:flex-none items-center bg-gray-100 text-black hover:bg-gray-100  border-black shadow-none font-semibold text-md ml-2 cursor-pointer"
         >
           Sort By
           {sortSelectorOpen ? (
