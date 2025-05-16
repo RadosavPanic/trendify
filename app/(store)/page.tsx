@@ -1,5 +1,6 @@
-import HomeCarousel from "@/components/Carousel/HomeCarousel";
-import FeaturedProducts from "@/components/Products/FeaturedProducts";
+import BrandHighlights from "@/components/Banners/BrandHighlights";
+import HomeCarousel from "@/components/Banners/HomeCarousel";
+import FeaturedProducts from "@/components/Banners/FeaturedProducts";
 
 const Home = () => {
   return (
@@ -7,7 +8,8 @@ const Home = () => {
       <HomeCarousel />
 
       <FeaturedProducts category="shoes" columnLayout="reversed" />
-      <FeaturedProducts category="clothing" rowLayout="reversed" />
+      <BrandHighlights />
+      <FeaturedProducts category="featured" rowLayout="reversed" />
     </div>
   );
 };

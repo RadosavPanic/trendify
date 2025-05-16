@@ -8,8 +8,7 @@ import { SanityLive } from "@/sanity/lib/live";
 import { VisualEditing } from "next-sanity";
 
 import DisableDraftMode from "@/components/DisableDraftMode";
-import Header from "@/components/Menu/Header";
-import SpringSaleBanner from "@/components/SpringSaleBanner";
+import Navigation from "@/components/Menu/Navigation";
 
 export const metadata: Metadata = {
   title: "Trendify - Shop Smart, Dress Sharp - Fashion You Love at Fair Prices",
@@ -33,8 +32,7 @@ export default async function RootLayout({
           )}
 
           <main>
-            <Header />
-            <SpringSaleBanner />
+            <Navigation />
             {children}
           </main>
 
