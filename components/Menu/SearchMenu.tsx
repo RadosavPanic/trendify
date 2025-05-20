@@ -1,11 +1,14 @@
-import { SearchIcon } from "@sanity/icons";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import Form from "next/form";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-import { XIcon } from "lucide-react";
 import useMenuStore from "@/store/menuStore";
-import { useRouter } from "next/navigation";
+
+import { SearchIcon } from "@sanity/icons";
+import { XIcon } from "lucide-react";
 
 type SearchMenuProps = {
   handleToggleSearchMenu: () => void;
@@ -53,11 +56,11 @@ const SearchMenu = ({
   return (
     <>
       <div
-        className="fixed top-0 left-0 w-full h-full bg-black/25 bg-opacity-30 z-40"
+        className="fixed top-0 left-0 w-full h-full bg-black/25 bg-opacity-30 z-100"
         onClick={handleToggleSearchMenu}
       />
 
-      <div className="absolute top-0 left-0 w-full h-1/2 bg-white z-50 shadow-md flex flex-col">
+      <div className="fixed top-0 left-0 w-full h-1/2 bg-white shadow-md flex flex-col z-200">
         <div className="flex justify-between items-center px-4 lg:px-10 py-4">
           <Link href="/" className="hidden lg:inline">
             <Image

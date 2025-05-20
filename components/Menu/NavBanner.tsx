@@ -1,7 +1,7 @@
 import { use } from "react";
 import { getActiveSaleByCouponCode } from "@/sanity/lib/sales/getActiveSaleByCouponCode";
 
-const SpringSaleBanner = () => {
+const NavBanner = () => {
   const sale = use(getActiveSaleByCouponCode("SPRING2025"));
 
   if (!sale?.isActive) return null;
@@ -29,4 +29,4 @@ const SpringSaleBanner = () => {
   );
 };
 
-export default SpringSaleBanner;
+export default NavBanner;

@@ -13,8 +13,8 @@ type FeaturedProductsProps = {
 
 const layoutMap = {
   categoryChoice: {
-    shoes: "new-shoes",
-    featured: "new-arrivals",
+    shoes: "featured-shoes",
+    featured: "featured-products",
   },
   column: {
     normal: "flex-col",
@@ -37,7 +37,7 @@ const FeaturedProducts = ({
 
   return (
     <div
-      className={`flex ${layoutMap.column[columnLayout]} ${layoutMap.row[rowLayout]} justify-between items-center mt-10 sm:mt-20 xl:mt-40 mx-0 gap-8 sm:gap-14 xl:gap-28 pb-20`}
+      className={`flex ${layoutMap.column[columnLayout]} ${layoutMap.row[rowLayout]} justify-between items-center mt-10 sm:mt-20 xl:mt-40 gap-8 sm:gap-14 xl:gap-28 pb-20`}
     >
       <Link
         href={
@@ -45,7 +45,7 @@ const FeaturedProducts = ({
             ? "/products/air-max-dn8"
             : "/categories/new-arrivals"
         }
-        className="flex-shrink-0 w-full xl:w-1/2 p-0 sm:p-10 2xl:p-20"
+        className="flex-shrink-0 w-full xl:w-1/2 p-2 sm:p-10 2xl:p-20"
       >
         <Image
           src={
@@ -60,7 +60,7 @@ const FeaturedProducts = ({
         />
       </Link>
 
-      <div className="grid grid-cols-2 gap-6 w-full  p-0 xl:p-10">
+      <div className="grid grid-cols-2 gap-6 w-full p-4 xl:p-10">
         {products.map((product) => (
           <div
             className="relative bg-transparent mx-0 sm:mx-2 md:mx-5 lg:mx-10 my-10 xl:mb-10"

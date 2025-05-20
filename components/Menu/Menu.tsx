@@ -9,13 +9,16 @@ import Link from "next/link";
 import Image from "next/image";
 import MenuContainer from "./MenuContainer";
 import MenuView from "./MenuView";
-import SearchMenu from "./SearchMenu";
 
 import { ClerkLoaded, SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import useCartStore from "@/store/cartStore";
 import { useState } from "react";
 
-const Header = () => {
+type HeaderProps = {
+  handleToggleSearchMenu: () => void;
+};
+
+const Menu = ({ handleToggleSearchMenu }: HeaderProps) => {
   const { user } = useUser();
 
   const itemCount = useCartStore((state) =>
@@ -23,25 +26,13 @@ const Header = () => {
   );
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSearchMenuOpen, setIsSearchMenuOpen] = useState(false);
 
   const handleToggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
-  const handleToggleSearchMenu = () => {
-    setIsSearchMenuOpen((prev) => !prev);
-  };
-
   return (
     <>
-      {isSearchMenuOpen && (
-        <SearchMenu
-          isSearchMenuOpen={isSearchMenuOpen}
-          handleToggleSearchMenu={handleToggleSearchMenu}
-        />
-      )}
-
       <header className="headerElement relative flex w-full flex-wrap justify-between items-center bg-gray-100 h-16 px-4">
         <Link
           href="/"
@@ -122,4 +113,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Menu;

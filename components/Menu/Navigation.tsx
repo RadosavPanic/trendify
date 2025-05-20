@@ -1,12 +1,13 @@
-import Header from "./Header";
-import SpringSaleBanner from "./SpringSaleBanner";
+import MenuWrapper from "./MenuWrapper";
+import NavBanner from "./NavBanner";
 
 const Navigation = () => {
   return (
-    <div className="sticky top-0 z-50">
-      <Header />
-      <SpringSaleBanner />
-    </div>
+    <>
+      <MenuWrapper>
+        <NavBanner />
+      </MenuWrapper>
+    </>
   );
 };
 
