@@ -7,7 +7,7 @@ const NavBanner = () => {
   if (!sale?.isActive) return null;
 
   return (
-    <div className="saleBannerElement bg-black/90 text-white w-full h-12 flex items-center justify-center">
+    <div className="saleBannerElement bg-black text-white w-full h-12 flex items-center justify-center">
       <div className="text-center text-xs md:text-sm font-semibold sm:px-2 px-0">
         <div className="flex flex-wrap lg:flex-nowrap justify-center">
           <div className="flex justify-center">

@@ -209,3 +209,51 @@ export const menuItems: MenuItems = {
     },
   },
 };
+
+export const footerMenuItems = [
+  {
+    title: "Categories",
+    links: [
+      { name: "Shoes", slug: "#" },
+      { name: "Clothing", slug: "#" },
+      { name: "Accessories", slug: "#" },
+      { name: "Gift Cards", slug: "#" },
+      { name: "New Arrivals", slug: "#" },
+      { name: "Best Sellers", slug: "#" },
+      { name: "Sale", slug: "#" },
+    ],
+  },
+  {
+    title: "Help",
+    links: [
+      { name: "Get Help", slug: "#" },
+      { name: "Payment Options", slug: "#" },
+      { name: "Order Status", slug: "#" },
+      { name: "Shipping and Delivery", slug: "#" },
+      { name: "Returns", slug: "#" },
+      { name: "Contact Us", slug: "#" },
+      { name: "Reviews", slug: "#" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { name: "About Trendify", slug: "#" },
+      { name: "News", slug: "#" },
+      { name: "Careers", slug: "#" },
+      { name: "Find a Store", slug: "#" },
+      { name: "Purpose", slug: "#" },
+      { name: "FAQ", slug: "#" },
+    ],
+  },
+];
+
+export const paymentMethods = [
+  { name: "Mastercard", src: "/mastercard.png", width: 50, height: 50 },
+  { name: "Maestro", src: "/maestro.png", width: 50, height: 50 },
+  { name: "Visa", src: "/visa.png", width: 50, height: 50 },
+  { name: "PayPal", src: "/paypal.png", width: 50, height: 50 },
+  { name: "Google Pay", src: "/google-pay.png", width: 50, height: 50 },
+  { name: "Apple Pay", src: "/apple-pay.png", width: 50, height: 50 },
+  { name: "Cash Payment", src: "/cash-payment.png", width: 50, height: 50 },
+];

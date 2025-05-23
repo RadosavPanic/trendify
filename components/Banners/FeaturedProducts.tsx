@@ -12,7 +12,7 @@ type FeaturedProductsProps = {
 };
 
 const layoutMap = {
-  categoryChoice: {
+  categorySlug: {
     shoes: "featured-shoes",
     featured: "featured-products",
   },
@@ -32,7 +32,7 @@ const FeaturedProducts = ({
   rowLayout = "normal",
 }: FeaturedProductsProps) => {
   const products: Product[] = use(
-    getProductsByCategory(layoutMap.categoryChoice[category])
+    getProductsByCategory(layoutMap.categorySlug[category])
   ).slice(0, 4);
 
   return (
@@ -67,12 +67,12 @@ const FeaturedProducts = ({
             key={product._id}
           >
             <Link href={`/product/${product.slug?.current}`}>
-              <div className="relative aspect-square w-full overflow-hidden">
+              <div className="group relative aspect-square w-full overflow-hidden">
                 <Image
                   src={imageUrl(product.image!).url()}
                   alt={product.name || "Product image"}
                   fill
-                  className="object-contain"
+                  className={`object-contain transition-transform duration-600 group-hover:scale-110 ${category === "shoes" && "group-hover:rotate-5"}`}
                 />
                 <span className="absolute top-4 left-0 bg-blue-500 text-white text-xs font-bold px-2 py-1">
                   NEW

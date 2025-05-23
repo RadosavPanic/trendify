@@ -9,6 +9,7 @@ import { VisualEditing } from "next-sanity";
 
 import DisableDraftMode from "@/components/DisableDraftMode";
 import Navigation from "@/components/Menu/Navigation";
+import Footer from "@/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Trendify - Shop Smart, Dress Sharp - Fashion You Love at Fair Prices",
@@ -34,6 +35,7 @@ export default async function RootLayout({
           <main>
             <Navigation />
             {children}
+            <Footer />
           </main>
 
           <SanityLive />
