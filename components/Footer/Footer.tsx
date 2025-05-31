@@ -28,7 +28,7 @@ const Footer = () => {
                     className="relative group"
                   >
                     {link.name}
-                    <span className="absolute left-0 right-0 -bottom-1 h-0.5 bg-black rounded-full origin-center scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                    <span className="absolute left-0 right-0 -bottom-1 h-0.5 bg-black rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-out" />
                   </Link>
                 </li>
               ))}
@@ -78,13 +78,14 @@ const Footer = () => {
               title={method.name}
               width={50}
               height={50}
+              className="w-[35px] md:w-[50px] h-auto"
             />
           ))}
         </div>
       </div>
 
-      <div className="py-6 lg:py-2 flex flex-col items-center justify-center gap-4">
-        <div className="w-full px-2 lg:px-0 lg:w-[60%] xl:w-1/2">
+      <div className="py-3 lg:py-2 flex flex-col items-center justify-center gap-4">
+        <div className="w-full lg:px-0 lg:w-[60%] xl:w-1/2">
           <p className="text-center text-xs md:text-sm px-4">
             We strive to be as accurate as possible in product descriptions,
             image displays, and prices, but we cannot guarantee that all
@@ -94,7 +95,7 @@ const Footer = () => {
             Call Center.
           </p>
         </div>
-        <p className="text-sm font-semibold px-4 text-center">
+        <p className="text-xs text-center">
           ©2025 Trendify, Inc. All rights reserved. Created by: Radosav Panic
         </p>
       </div>
