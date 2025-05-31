@@ -249,11 +249,11 @@ export const footerMenuItems = [
 ];
 
 export const paymentMethods = [
-  { name: "Mastercard", src: "/mastercard.png", width: 50, height: 50 },
-  { name: "Maestro", src: "/maestro.png", width: 50, height: 50 },
-  { name: "Visa", src: "/visa.png", width: 50, height: 50 },
-  { name: "PayPal", src: "/paypal.png", width: 50, height: 50 },
-  { name: "Google Pay", src: "/google-pay.png", width: 50, height: 50 },
-  { name: "Apple Pay", src: "/apple-pay.png", width: 50, height: 50 },
-  { name: "Cash Payment", src: "/cash-payment.png", width: 50, height: 50 },
+  { name: "Mastercard", src: "/mastercard.png" },
+  { name: "Maestro", src: "/maestro.png" },
+  { name: "Visa", src: "/visa.png" },
+  { name: "PayPal", src: "/paypal.png" },
+  { name: "Google Pay", src: "/google-pay.png" },
+  { name: "Apple Pay", src: "/apple-pay.png" },
+  { name: "Cash Payment", src: "/cash-payment.png" },
 ];

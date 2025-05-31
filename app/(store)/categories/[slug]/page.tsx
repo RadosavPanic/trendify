@@ -10,7 +10,7 @@ const CategoryPage = ({ params }: SearchParamProps) => {
   const categories = use(getAllCategories());
 
   return (
-    <div className="flex flex-col items-center justify-top min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center justify-top min-h-screen p-4">
       <ProductsView
         productsArray={products}
         allCategories={categories}
