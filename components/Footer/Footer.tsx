@@ -1,81 +1,29 @@
-"use client";
-
-import Link from "next/link";
+import { use } from "react";
 import Image from "next/image";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
-import FollowUs from "./FollowUs";
-import { footerMenuItems, paymentMethods } from "@/constants";
+import { imageUrl } from "@/lib/imageUrl";
+import { getBannerBySlug } from "@/sanity/lib/banners/getBannerBySlug";
+
+import FooterLinksDesktop from "./FooterLinksDesktop";
+import FooterLinksMobile from "./FooterLinksMobile";
 
 const Footer = () => {
+  const bannerGroup = use(getBannerBySlug("banners-payments"));
+  const images = bannerGroup[0]?.images || [];
+
   return (
     <footer className="bg-gray-100 text-gray-800 border-t border-gray-300 mt-10">
-      <div className="container hidden lg:grid grid-cols-4 mx-auto px-10 py-4 lg:py-20">
-        {footerMenuItems.map((section) => (
-          <div key={section.title}>
-            <h3 className="font-bold text-lg mb-4">{section.title}</h3>
-            <ul className="space-y-2">
-              {section.links.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.slug}
-                    onClick={(e) => e.preventDefault()}
-                    className="relative group"
-                  >
-                    {link.name}
-                    <span className="absolute left-0 right-0 -bottom-1 h-0.5 bg-black rounded-full origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-400 ease-out" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <FooterLinksDesktop />
 
-        <FollowUs />
-      </div>
+      <FooterLinksMobile />
 
-      <div className="flex flex-col gap-4 lg:hidden p-5">
-        <Accordion type="single" collapsible className="w-full">
-          {footerMenuItems.map((section, idx) => (
-            <AccordionItem value={`item-${idx}`} key={section.title}>
-              <AccordionTrigger className="font-bold text-lg">
-                {section.title}
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-2 text-base">
-                <ul className="space-y-2">
-                  {section.links.map((link) => (
-                    <li key={link.name}>
-                      <Link
-                        href={link.slug}
-                        onClick={(e) => e.preventDefault()}
-                        className="block py-1 px-2"
-                      >
-                        {link.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-
-        <FollowUs />
-      </div>
-
-      <div className="bg-gray-200 py-6 px-6">
+      <div className="bg-blue-200 py-6 px-6">
         <div className="container mx-auto flex flex-wrap justify-center gap-4">
-          {paymentMethods.map((method) => (
+          {images.map((image, index) => (
             <Image
-              key={method.name}
-              src={method.src}
-              alt={method.name}
-              title={method.name}
+              key={`payment-method-${index}`}
+              src={imageUrl(image).url()}
+              alt="payment method image"
               width={50}
               height={50}
               className="w-[35px] md:w-[50px] h-auto"

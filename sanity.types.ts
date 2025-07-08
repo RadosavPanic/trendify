@@ -68,6 +68,28 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Banner = {
+  _id: string;
+  _type: "banner";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  group?: string;
+  slug?: Slug;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
 export type Sale = {
   _id: string;
   _type: "sale";
@@ -279,8 +301,33 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Sale | Order | Product | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Banner | Sale | Order | Product | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./sanity/lib/banners/getBannerBySlug.ts
+// Variable: BANNER_BY_SLUG_QUERY
+// Query: *[                _type == "banner"                && slug.current == $bannerSlug            ]
+export type BANNER_BY_SLUG_QUERYResult = Array<{
+  _id: string;
+  _type: "banner";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  group?: string;
+  slug?: Slug;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+}>;
+
 // Source: ./sanity/lib/orders/getMyOrders.ts
 // Variable: MY_ORDERS_QUERY
 // Query: *[_type == "order" && clerkUserId == $userId] | order(orderDate desc) {            ...,            products[]{                ...,                product->            }        }
@@ -660,6 +707,7 @@ export type ACTIVE_SALE_BY_COUPON_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "\n            *[\n                _type == \"banner\"\n                && slug.current == $bannerSlug\n            ]\n        ": BANNER_BY_SLUG_QUERYResult;
     "\n        *[_type == \"order\" && clerkUserId == $userId] | order(orderDate desc) {\n            ...,\n            products[]{\n                ...,\n                product->\n            }\n        }\n        ": MY_ORDERS_QUERYResult;
     "\n            *[\n                _type == \"category\"\n            ] | order(title asc)\n        ": ALL_CATEGORIES_QUERYResult;
     "\n            *[\n                _type == \"product\"\n            ] | order(name asc)\n        ": ALL_PRODUCTS_QUERYResult;

@@ -247,13 +247,3 @@ export const footerMenuItems = [
     ],
   },
 ];
-
-export const paymentMethods = [
-  { name: "Mastercard", src: "/mastercard.png" },
-  { name: "Maestro", src: "/maestro.png" },
-  { name: "Visa", src: "/visa.png" },
-  { name: "PayPal", src: "/paypal.png" },
-  { name: "Google Pay", src: "/google-pay.png" },
-  { name: "Apple Pay", src: "/apple-pay.png" },
-  { name: "Cash Payment", src: "/cash-payment.png" },
-];

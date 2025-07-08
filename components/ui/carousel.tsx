@@ -180,14 +180,14 @@ function CarouselPrevious({
     <button
       data-slot="carousel-previous"
       className={cn(
-        "absolute left-4 top-1/2 transform -translate-y-1/2 rounded-full bg-transparent hover:bg-transparent border-none text-gray-800 z-10 w-14 h-14 flex items-center justify-center",
+        "absolute left-4 top-1/2 transform -translate-y-1/2 rounded-full bg-blue-900 hover:bg-blue-800 border-none text-white z-10 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center",
         className
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
       {...props}
     >
-      <ChevronLeft className="w-12 h-12" />
+      <ChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
     </button>
   );
 }
@@ -199,14 +199,14 @@ function CarouselNext({ className, ...props }: React.ComponentProps<"button">) {
     <button
       data-slot="carousel-next"
       className={cn(
-        "absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full bg-transparent hover:bg-transparent border-none text-gray-800 z-10 w-14 h-14 flex items-center justify-center",
+        "absolute right-4 top-1/2 transform -translate-y-1/2 rounded-full bg-blue-900 hover:bg-blue-800 border-none text-white z-10 w-10 h-10 md:w-14 md:h-14 flex items-center justify-center",
         className
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
     >
-      <ChevronRight className="w-12 h-12" />
+      <ChevronRight className="w-4 h-4 md:w-6 md:h-6" />
     </button>
   );
 }

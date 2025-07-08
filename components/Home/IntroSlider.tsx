@@ -12,22 +12,15 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { Progress } from "../ui/progress";
 
-import Banner1Lg from "@/public/banner-pic-1-lg.jpg";
-import Banner1Sm from "@/public/banner-pic-1-sm.jpg";
+type IntroSliderProps = {
+  imagesLg: string[];
+  imagesSm: string[];
+};
 
-import Banner2Lg from "@/public/banner-pic-2-lg.jpg";
-import Banner2Sm from "@/public/banner-pic-2-sm.jpg";
-
-import Banner3Lg from "@/public/banner-pic-3-lg.jpg";
-import Banner3Sm from "@/public/banner-pic-3-sm.jpg";
-
-const HomeCarousel = () => {
+const IntroSlider = ({ imagesLg, imagesSm }: IntroSliderProps) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [progress, setProgress] = useState(0);
-
-  const imagesLg = [Banner1Lg, Banner2Lg, Banner3Lg];
-  const imagesSm = [Banner1Sm, Banner3Sm, Banner2Sm];
 
   const [images, setImages] = useState(imagesLg);
 
@@ -91,6 +84,9 @@ const HomeCarousel = () => {
             <Image
               alt="carousel image"
               src={src}
+              width={1920}
+              height={812}
+              sizes="100vw"
               className="w-full h-full object-cover"
             />
           </CarouselItem>
@@ -109,4 +105,4 @@ const HomeCarousel = () => {
   );
 };
 
-export default HomeCarousel;
+export default IntroSlider;

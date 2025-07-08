@@ -33,3 +33,18 @@ export const filterDisplayNames = {
   alphabetical: "name a-z",
   reverseAlphabetical: "name z-a",
 } as const;
+
+export const featuredProductsLayoutMap = {
+  categorySlug: {
+    shoes: "featured-shoes",
+    featured: "featured-products",
+  },
+  column: {
+    normal: "flex-col",
+    reversed: "flex-col-reverse",
+  },
+  row: {
+    normal: "xl:flex-row",
+    reversed: "xl:flex-row-reverse",
+  },
+} as const;

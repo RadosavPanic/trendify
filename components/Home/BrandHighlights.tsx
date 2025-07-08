@@ -1,12 +1,14 @@
-"use client";
-
+import { use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import NikeBanner from "@/public/nike_highlight_banner.jpeg";
-import AdidasBanner from "@/public/adidas_highlight_banner.jpeg";
-import NewBalanceBanner from "@/public/newbalance_highlight_banner.jpg";
+
+import { getBannerBySlug } from "@/sanity/lib/banners/getBannerBySlug";
+import { imageUrl } from "@/lib/imageUrl";
 
 const BrandHighlights = () => {
+  const bannerGroup = use(getBannerBySlug("banners-highlights"));
+  const images = bannerGroup[0]?.images || [];
+
   return (
     <div className="mt-0 lg:mt-20 mx-4 sm:mx-10 xl:mx-20 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
       <Link
@@ -15,7 +17,7 @@ const BrandHighlights = () => {
       >
         <div className="w-full h-full overflow-hidden">
           <Image
-            src={NikeBanner}
+            src={imageUrl(images[0]).url()}
             alt="Nike"
             width={557}
             height={557}
@@ -33,7 +35,7 @@ const BrandHighlights = () => {
       >
         <div className="w-full h-full overflow-hidden">
           <Image
-            src={NewBalanceBanner}
+            src={imageUrl(images[1]).url()}
             alt="New Balance"
             width={557}
             height={557}
@@ -49,8 +51,8 @@ const BrandHighlights = () => {
       >
         <div className="w-full h-full overflow-hidden">
           <Image
-            src={AdidasBanner}
-            alt="Adidas"
+            src={imageUrl(images[2]).url()}
+            alt="highlight image"
             width={557}
             height={557}
             className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-110"

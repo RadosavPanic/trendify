@@ -1,16 +1,19 @@
-import BrandHighlights from "@/components/Banners/BrandHighlights";
-import HomeCarousel from "@/components/Banners/HomeCarousel";
-import FeaturedProducts from "@/components/Banners/FeaturedProducts";
+import IntroSliderWrapper from "@/components/Home/IntroSliderWrapper";
+import BrandHighlights from "@/components/Home/BrandHighlights";
+import FeaturedProducts from "@/components/Home/FeaturedProducts";
+import FashionSlider from "@/components/Home/FashionSlider";
+import BrandList from "@/components/Home/BrandList";
 
 const Home = () => {
   return (
-    <div>
-      <HomeCarousel />
-
+    <>
+      <IntroSliderWrapper />
       <FeaturedProducts category="shoes" columnLayout="reversed" />
       <BrandHighlights />
       <FeaturedProducts category="featured" rowLayout="reversed" />
-    </div>
+      <FashionSlider />
+      <BrandList />
+    </>
   );
 };
 

@@ -1,9 +1,14 @@
+import { use } from "react";
 import Link from "next/link";
 import Image from "next/image";
+
 import { Product } from "@/sanity.types";
 import { imageUrl } from "@/lib/imageUrl";
+
 import { getProductsByCategory } from "@/sanity/lib/products/getProductsByCategory";
-import { use } from "react";
+import { getBannerBySlug } from "@/sanity/lib/banners/getBannerBySlug";
+
+import { featuredProductsLayoutMap } from "@/lib/utils";
 
 type FeaturedProductsProps = {
   category: "shoes" | "featured";
@@ -11,33 +16,23 @@ type FeaturedProductsProps = {
   rowLayout?: "normal" | "reversed";
 };
 
-const layoutMap = {
-  categorySlug: {
-    shoes: "featured-shoes",
-    featured: "featured-products",
-  },
-  column: {
-    normal: "flex-col",
-    reversed: "flex-col-reverse",
-  },
-  row: {
-    normal: "xl:flex-row",
-    reversed: "xl:flex-row-reverse",
-  },
-} as const;
-
 const FeaturedProducts = ({
   category,
   columnLayout = "normal",
   rowLayout = "normal",
 }: FeaturedProductsProps) => {
+  const { categorySlug, column, row } = featuredProductsLayoutMap;
+
   const products: Product[] = use(
-    getProductsByCategory(layoutMap.categorySlug[category])
+    getProductsByCategory(categorySlug[category])
   ).slice(0, 4);
+  const bannerGroup = use(getBannerBySlug("banners-featured"));
+
+  const images = bannerGroup[0]?.images || [];
 
   return (
     <div
-      className={`flex ${layoutMap.column[columnLayout]} ${layoutMap.row[rowLayout]} justify-between items-center mt-10 sm:mt-20 xl:mt-40 gap-8 sm:gap-14 xl:gap-28 pb-20`}
+      className={`flex ${column[columnLayout]} ${row[rowLayout]} justify-between items-center mt-10 sm:mt-20 xl:mt-40 gap-8 sm:gap-14 xl:gap-28 pb-10`}
     >
       <Link
         href={
@@ -50,10 +45,10 @@ const FeaturedProducts = ({
         <Image
           src={
             category === "shoes"
-              ? "/nikeairmax-banner.jpeg"
-              : "/newarrivals-banner.jpeg"
+              ? imageUrl(images[0]).url()
+              : imageUrl(images[1]).url()
           }
-          alt="air max dn8"
+          alt="featured image"
           width={700}
           height={800}
           className="w-full h-auto object-cover"
