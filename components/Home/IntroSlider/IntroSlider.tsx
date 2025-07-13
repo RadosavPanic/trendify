@@ -10,7 +10,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { Progress } from "../ui/progress";
+import { Progress } from "@/components/ui/progress";
 
 type IntroSliderProps = {
   imagesLg: string[];

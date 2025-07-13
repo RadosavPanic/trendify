@@ -1,7 +1,7 @@
-import IntroSliderWrapper from "@/components/Home/IntroSliderWrapper";
-import BrandHighlights from "@/components/Home/BrandHighlights";
+import IntroSliderWrapper from "@/components/Home/IntroSlider/IntroSliderWrapper";
 import FeaturedProducts from "@/components/Home/FeaturedProducts";
-import FashionSlider from "@/components/Home/FashionSlider";
+import BrandHighlights from "@/components/Home/BrandHighlights";
+import FashionSliderWrapper from "@/components/Home/FashionSlider/FashionSliderWrapper";
 import BrandList from "@/components/Home/BrandList";
 
 const Home = () => {
@@ -11,7 +11,7 @@ const Home = () => {
       <FeaturedProducts category="shoes" columnLayout="reversed" />
       <BrandHighlights />
       <FeaturedProducts category="featured" rowLayout="reversed" />
-      <FashionSlider />
+      <FashionSliderWrapper />
       <BrandList />
     </>
   );
