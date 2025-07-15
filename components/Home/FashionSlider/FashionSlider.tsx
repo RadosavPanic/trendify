@@ -43,9 +43,9 @@ const FashionSlider = ({ images }: FashionSliderProps) => {
         containScroll: "keepSnaps",
       }}
       setApi={setApi}
-      className="w-full h-full py-2 px-6 md:px-10 xl:px-20"
+      className="w-full h-full py-10 lg:py-20 px-0 xl:px-20"
     >
-      <CarouselContent className="flex w-full gap-1">
+      <CarouselContent className="flex w-full gap-1 select-none">
         {images?.map((image, idx) => (
           <CarouselItem
             key={imageUrl(image).url()}

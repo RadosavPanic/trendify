@@ -55,6 +55,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.3",
     "jsdom": "^26.1.0",
+    "tailwind-scrollbar": "^4.0.2",
     "tailwindcss": "^4",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5",
