@@ -1,7 +1,7 @@
 "use client";
 
 import { TrolleyIcon, SearchIcon } from "@sanity/icons";
-import { FaRegUser } from "react-icons/fa";
+import { FaBoxOpen, FaRegUser } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 
@@ -69,6 +69,15 @@ const Menu = ({ handleToggleSearchMenu }: HeaderProps) => {
                   <p className="text-gray-700">Welcome back</p>
                   <p className="font-bold">{user?.fullName}</p>
                 </div>
+                <Link
+                  href="/orders"
+                  className="group flex justify-center sm:justify-start sm:flex-none items-center -space-x-1 font-bold py-2 px-2 pr-1 pl-0 rounded"
+                >
+                  <FaBoxOpen className="size-8 group-hover:text-blue-700 mx-1" />
+                  <span className="hidden lg:inline text-sm pt-1">
+                    My Orders
+                  </span>
+                </Link>
               </div>
             ) : (
               <SignInButton mode="modal">
