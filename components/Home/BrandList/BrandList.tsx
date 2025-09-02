@@ -18,32 +18,29 @@ const BrandList = ({ images }: BrandListProps) => {
     isDragging.current = true;
     startX.current = e.pageX - (scrollRef.current?.offsetLeft ?? 0);
     scrollLeft.current = scrollRef.current?.scrollLeft ?? 0;
-    document.body.style.cursor = "grabbing";
   };
 
   const handleMouseLeave = () => {
     isDragging.current = false;
-    document.body.style.cursor = "";
   };
 
   const handleMouseUp = () => {
     isDragging.current = false;
-    document.body.style.cursor = "";
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging.current) return;
     e.preventDefault();
     const x = e.pageX - (scrollRef.current?.offsetLeft ?? 0);
-    const walk = (x - startX.current) * 1.5;
+    const walk = (x - startX.current) * 2;
     if (scrollRef.current)
       scrollRef.current.scrollLeft = scrollLeft.current - walk;
   };
 
   return (
-    <div className="relative w-full my-16 py-6 px-6 lg:px-20 xl:px-24  overflow-hidden bg-gradient-to-r from-blue-500 via-orange-400 to-blue-400 shiny-overlay">
+    <div className="relative w-full my-16 py-6 px-6 lg:px-20 xl:px-24  overflow-hidden bg-gradient-to-t from-black/80 via-blue-500 to-white shiny-overlay">
       <div
-        className="overflow-x-scroll scrollbar-thin scrollbar-thumb-sky-700 scrollbar-track-transparent"
+        className="overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent"
         ref={scrollRef}
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}

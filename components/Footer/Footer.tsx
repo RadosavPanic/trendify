@@ -17,7 +17,7 @@ const Footer = () => {
 
       <FooterLinksMobile />
 
-      <div className="bg-blue-200 py-6 px-6">
+      <div className=" py-6 px-6">
         <div className="container mx-auto flex flex-wrap justify-center gap-4">
           {images.map((image, index) => (
             <Image
@@ -43,7 +43,7 @@ const Footer = () => {
             Call Center.
           </p>
         </div>
-        <p className="text-xs text-center">
+        <p className="text-xs font-semibold text-center">
           ©2025 Trendify, Inc. All rights reserved. Created by: Radosav Panic
         </p>
       </div>

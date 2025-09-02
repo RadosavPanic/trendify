@@ -4,7 +4,7 @@ import {
   createCheckoutSession,
   MetaData,
 } from "@/actions/createCheckoutSession";
-import AddToCartButton from "@/components/AddToCartButton";
+import ChangeQtyCartButton from "@/components/Cart/ChangeQtyCartButton";
 import Loader from "@/components/Loader";
 import { imageUrl } from "@/lib/imageUrl";
 import useCartStore from "@/store/cartStore";
@@ -100,7 +100,7 @@ const CartPage = () => {
                 </div>
 
                 <div className="flex items-center ml-4 flex-shrink-0">
-                  <AddToCartButton product={item.product} />
+                  <ChangeQtyCartButton product={item.product} />
                 </div>
               </div>
             ))

@@ -5,12 +5,15 @@ import useCartStore from "@/store/cartStore";
 import { Trash2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 
-type AddToCartButtonTypes = {
+type ChangeQtyCartButtonTypes = {
   product: Product;
   disabled?: boolean;
 };
 
-const AddToCartButton = ({ product, disabled }: AddToCartButtonTypes) => {
+const ChangeQtyCartButton = ({
+  product,
+  disabled,
+}: ChangeQtyCartButtonTypes) => {
   const { addItem, removeItem, getItemCount } = useCartStore();
   const itemCount = getItemCount(product._id);
 
@@ -46,4 +49,4 @@ const AddToCartButton = ({ product, disabled }: AddToCartButtonTypes) => {
   );
 };
 
-export default AddToCartButton;
+export default ChangeQtyCartButton;
